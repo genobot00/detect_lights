@@ -337,7 +337,8 @@ def configure_timeout(runtime_hours: int) -> datetime | None:
     if runtime_hours > 0:
         _date = _date + timedelta(hours=runtime_hours)
     else:
-        _date = get_next_sunrise()
+        # Set timeout as 30 minutes before sunrise
+        _date = get_next_sunrise() - timedelta(minutes=30)
     time_str = _date.strftime("%Y-%m-%d %H:%M:%S")
     print(f"This program will stop on {time_str}")
     return _date
